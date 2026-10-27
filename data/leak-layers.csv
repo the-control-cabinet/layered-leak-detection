@@ -1,0 +1,6 @@
+layer,detects,method,speed,priority,status
+1 Point sensors,Water on floor,Zigbee leak sensors,seconds,P1,Live
+2 Flow analytics,Hidden leaks / dripping / burst,Clamp-on ultrasonic meter: steady low flow 10 min; per-draw; overnight,minutes-hours,P1 burst / P2 steady,Live
+3 Pressure decay,Heating primary weep,Boiler pressure transducer: same-condition daily reading; <1.0 bar alarm,days,P2/P3,In progress
+4 Safety discharge,Unvented cylinder relief discharge,Tundish plates + cylinder inlet pressure,seconds,P1/P2,To install
+5 Circuit isolation,Leak location,Sequential isolation; manifold pressure (proposed),days,diagnostic,Planned

@@ -1,0 +1,27 @@
+automation:
+  - id: leak_point_sensor_wet
+    alias: Leak - point sensor wet (P1)
+    triggers:
+      - trigger: state
+        entity_id:                       # list your water-leak binary sensors
+          - binary_sensor.leak_sensor_1
+          - binary_sensor.leak_sensor_2
+        to: "on"
+    actions:
+      - action: notify.send_message
+        target: {entity_id: notify.your_phone}
+        data:
+          title: "P1 - Water detected"
+          message: "{{ trigger.to_state.name }} is wet."
+  - id: leak_tundish_discharge
+    alias: Leak - tundish discharge (P1)
+    triggers:
+      - trigger: state
+        entity_id: binary_sensor.tundish_any_wet
+        to: "on"
+    actions:
+      - action: notify.send_message
+        target: {entity_id: notify.your_phone}
+        data:
+          title: "P1 - Tundish discharge"
+          message: "Unvented cylinder relief discharge - check expansion vessel and inlet pressure."
