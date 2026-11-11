@@ -15,6 +15,8 @@
 > 5. **Circuit isolation** to locate a leak
 >
 > Layers 1, 2 and 4 are live; 3 is calibrated and gathering a baseline; 5 is planned.
+>
+> **Layer 4 in practice:** the tundish sensors caught a weeping relief valve; new expansion vessels fixed it (11 Nov), and the same sensors plus the inlet gauges confirmed the fix (no discharges, 3.8 bar reheat peak).
 
 **Portfolio position:** Automation level · leak detection and alarm strategy. Related: [Mains water metering](https://github.com/the-control-cabinet/mains-water-metering-modbus-rtu) · [Heating plant monitoring](https://github.com/the-control-cabinet/heating-plant-monitoring-esphome)
 
