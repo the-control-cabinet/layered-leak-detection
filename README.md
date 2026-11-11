@@ -27,7 +27,7 @@
 | **1. Point sensors** | Water on the floor (appliances, sinks, plant areas) | Zigbee water-leak sensors at wet locations | Seconds | ✅ Live |
 | **2. Mains flow analytics** | Hidden leaks, dripping taps, passing toilet valves, a burst pipe | Clamp-on ultrasonic meter: **steady low flow for 10 min** alert, per-draw tracking, overnight usage | Minutes to hours | ✅ Live |
 | **3. Sealed-system pressure decay** | Slow weeps in the heating primary circuit | Boiler pressure transducer: a daily same-condition reading → **bar/day decay**; low-pressure alarm | Days | 🚧 Sensor installed; calibration and analytics in progress |
-| **4. Safety-device discharge** | Unvented cylinder relief discharge (expansion or overpressure) | **Tundish drip sensors** (pulsed plates) + cylinder inlet pressure rise | Seconds | ✅ Live: both tundishes commissioned (wet + running), inlet gauges zeroed |
+| **4. Safety-device discharge** | Unvented cylinder relief discharge (expansion or overpressure) | **Tundish drip sensors** (pulsed plates) + cylinder inlet pressure rise | Seconds | ✅ Live: both tundishes water-tested (naming confirmed); inlet gauges live with alerts (> 4.5 bar); no discharges since the vessels were replaced (11 Nov) |
 | **5. Circuit isolation** | *Where* the heating leak is | Isolate circuits one at a time; a proposed **UFH manifold pressure** sensor for a split-system test | Days | 📐 Planned |
 
 ```mermaid
@@ -84,3 +84,8 @@ flowchart TB
 - **Second signal for the same layer:** cylinder **inlet pressure** gauges (zeroed 11 Nov). A rise towards the 6 bar relief setting during a reheat warns of vessel failure **before** anything discharges.
 - Details: [heating plant monitoring, docs 05 and 13](https://github.com/the-control-cabinet/heating-plant-monitoring-esphome).
 
+## Update, 11 Nov 2026: the fix confirmed, and two lessons
+
+- **Root cause fixed:** both expansion vessels replaced (24 L, 3.5 bar). On the first reheats the inlet pressures rose to a clear "knee" at the pre-charge and peaked at **3.8 bar** (relief at 6 bar), and neither tundish registered a wet event. Layer 4 detected the fault, and now confirms the fix.
+- **Water test:** wetting the right plate set *Right Wet* and *Right Running*. The test water then pooled under the plate in its printed holder for over 30 minutes (still reading "running"): a sensor holder must **drain**, or one drip looks like a long discharge. Holder to be remounted steeper, cable from below, with a drain hole.
+- **A sensing fault can look like a real one:** a loose divider leg in a gauge box made one cylinder read 5 bar; the pin voltage being exactly 1.5× its neighbour's identified the divider rather than the water. Plausibility checks (F20) and comparing like-for-like sensors catch this class of fault.
