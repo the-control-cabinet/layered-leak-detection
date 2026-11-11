@@ -14,7 +14,7 @@
 > 4. **Safety-device discharge** at the cylinder tundishes
 > 5. **Circuit isolation** to locate a leak
 >
-> Layers 1 and 2 are live; 3-5 are being installed with the plant-room monitoring.
+> Layers 1, 2 and 4 are live; 3 is calibrated and gathering a baseline; 5 is planned.
 
 **Portfolio position:** Automation level · leak detection and alarm strategy. Related: [Mains water metering](https://github.com/the-control-cabinet/mains-water-metering-modbus-rtu) · [Heating plant monitoring](https://github.com/the-control-cabinet/heating-plant-monitoring-esphome)
 
@@ -27,7 +27,7 @@
 | **1. Point sensors** | Water on the floor (appliances, sinks, plant areas) | Zigbee water-leak sensors at wet locations | Seconds | ✅ Live |
 | **2. Mains flow analytics** | Hidden leaks, dripping taps, passing toilet valves, a burst pipe | Clamp-on ultrasonic meter: **steady low flow for 10 min** alert, per-draw tracking, overnight usage | Minutes to hours | ✅ Live |
 | **3. Sealed-system pressure decay** | Slow weeps in the heating primary circuit | Boiler pressure transducer: a daily same-condition reading → **bar/day decay**; low-pressure alarm | Days | 🚧 Sensor installed; calibration and analytics in progress |
-| **4. Safety-device discharge** | Unvented cylinder relief discharge (expansion or overpressure) | **Tundish drip sensors** (pulsed plates) + cylinder inlet pressure rise | Seconds | 🚧 To install |
+| **4. Safety-device discharge** | Unvented cylinder relief discharge (expansion or overpressure) | **Tundish drip sensors** (pulsed plates) + cylinder inlet pressure rise | Seconds | ✅ Live: both tundishes commissioned (wet + running), inlet gauges zeroed |
 | **5. Circuit isolation** | *Where* the heating leak is | Isolate circuits one at a time; a proposed **UFH manifold pressure** sensor for a split-system test | Days | 📐 Planned |
 
 ```mermaid
@@ -75,3 +75,12 @@ flowchart TB
 📺 [The Control Cabinet on YouTube](https://www.youtube.com/channel/UC5Cupmz7vlfcodpCX7k8iuQ)
 
 *Built and documented by James · part of [The Control Cabinet BMS portfolio](https://github.com/the-control-cabinet). MIT Licence.*
+
+## Update, November 2026: layer 4 in service
+
+- **Tundish sensors commissioned** (5 Nov) on both unvented cylinders: pulsed plates (150 ms every 5 s) through 2N7000 MOSFETs, with two sensitivities: **wet** (2.2 MΩ pull-down, droplets) and **running** (the ESP32's internal pull-down, a flow). Phone alert on wet.
+- **It earned its place immediately:** it caught the **expansion relief valve weeping** on reheats, the classic sign of a vessel that has lost its pre-charge. Both vessels and relief valves were replaced on 11 Nov.
+- **Commissioning lessons:** at 2 MΩ, every surface matters. A dry gate reading of 0.9 V was traced to a **damaged MOSFET** (replaced), then to flux and handling residue (IPA clean: 30 mV); the plates mount steeper and the cables come in from below so droplets clear.
+- **Second signal for the same layer:** cylinder **inlet pressure** gauges (zeroed 11 Nov). A rise towards the 6 bar relief setting during a reheat warns of vessel failure **before** anything discharges.
+- Details: [heating plant monitoring, docs 05 and 13](https://github.com/the-control-cabinet/heating-plant-monitoring-esphome).
+
